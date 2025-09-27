@@ -1,0 +1,2 @@
+# start DB
+docker-compose up -d
