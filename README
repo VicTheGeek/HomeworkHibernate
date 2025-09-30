@@ -1,2 +1,8 @@
+# run container
+docker run --name pg-hibernate -e POSTGRES_PASSWORD=123456789 -e POSTGRES_DB=users_db -p 5432:5432 -d postgres:17
+
+# check if container running
+docker ps
+
 # start DB
 docker-compose up -d
