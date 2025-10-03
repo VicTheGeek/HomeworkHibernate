@@ -1,8 +1,57 @@
-# run container
-docker run --name pg-hibernate -e POSTGRES_PASSWORD=123456789 -e POSTGRES_DB=users_db -p 5432:5432 -d postgres:17
+# start DB
+docker-compose up -d
 
 # check if container running
 docker ps
 
-# start DB
-docker-compose up -d
+# run container
+docker run --name pg-hibernate -e POSTGRES_PASSWORD=123456789 -e POSTGRES_DB=users_db -p 5432:5432 -d postgres:17
+
+# in case of docker fuck around
+# 1- docker-compose down -v                                                           - stop and erase container
+# 2- docker volume prune -f                                                           - clean volume
+# 3- docker-compose up -d                                                             - restart
+# 4- docker ps - check status
+# 5- docker exec -it hwhibernate-postgres-1 psql -U postgres -d users_db              - reconnect
+# 6- psql -h localhost -p 5432 -U postgres -d users_db                                - manual connection
+
+# FUTURE TASKS
+# how to use logger instead of sout?
+# how to validate data?
+
+
+# MEMOS
+
+# win
+# .\start_postgres.bat
+
+# linux/macos
+# chmod +x start_postgres.sh
+# ./start_postgres.sh
+
+# Links
+# https://www.javacodegeeks.com/2024/12/mocking-repositories-and-daos-in-java-with-mockito.html
+# needed - org.mockito:mockito-core & org.mockito:mockito-junit-jupiter
+# https://docs.junit.org/current/user-guide/
+# https://java.testcontainers.org/modules/databases/postgres/
+# https://testcontainers.com/modules/postgresql/
+# !!!!!!!!!!!!!!!!!!!!!!! https://testcontainers.com/guides/testcontainers-container-lifecycle/ !!!!!!!!!!!!!!!!!!!!!!!
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#

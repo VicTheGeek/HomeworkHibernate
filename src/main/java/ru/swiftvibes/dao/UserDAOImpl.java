@@ -5,6 +5,10 @@ import org.hibernate.Transaction;
 import ru.swiftvibes.entity.User;
 import ru.swiftvibes.util.HibernateUtil;
 
+// LOGS
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 /**
@@ -13,6 +17,8 @@ import java.util.List;
 
 public class UserDAOImpl implements UserDao {
 
+    private static final Logger log = LoggerFactory.getLogger(UserDAOImpl.class);
+
     @Override
     public void create(User user) {
         Transaction tx = null;
@@ -20,11 +26,12 @@ public class UserDAOImpl implements UserDao {
             tx = session.beginTransaction();
             session.persist(user);
             tx.commit();
+            log.info("user {} was created successfully", user.getName());
         } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
-                e.printStackTrace();
             }
+            log.error(e.getMessage());
         }
     }
 
@@ -49,11 +56,12 @@ public class UserDAOImpl implements UserDao {
             tx = session.beginTransaction();
             session.merge(user);
             tx.commit();
+            log.info("user {} was updated successfully", user.getName());
         } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
             }
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 
@@ -67,11 +75,12 @@ public class UserDAOImpl implements UserDao {
                 session.remove(user);
             }
             tx.commit();
+            log.info("user {} was deleted successfully", user.getName());
         } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
             }
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 
@@ -82,11 +91,12 @@ public class UserDAOImpl implements UserDao {
             tx = session.beginTransaction();
             session.createMutationQuery("delete from User").executeUpdate();
             tx.commit();
+            log.info("all users were deleted successfully");
         } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
             }
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 }

@@ -1,6 +1,7 @@
 package ru.swiftvibes.util;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -9,6 +10,7 @@ import org.hibernate.cfg.Configuration;
  */
 
 public class HibernateUtil {
+    @Setter
     @Getter
     private static SessionFactory sessionFactory;
 
@@ -21,9 +23,14 @@ public class HibernateUtil {
         }
     }
 
-    // Field 'sessionFactory' was wrapped to Lombok @Getter
+    // Field getSessionFactory was wrapped to Lombok @Getter
 
     public static void closeSF() {
-        sessionFactory.close();
+        if (sessionFactory != null) {
+            sessionFactory.close();
+        }
     }
+
+    // Field setSessionFactory was wrapped to Lombok @Setter
+
 }

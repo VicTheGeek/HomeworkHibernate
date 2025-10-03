@@ -7,13 +7,14 @@ import ru.swiftvibes.util.HibernateUtil;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
+import ru.swiftvibes.dao.UserDAOImpl;
 
 /**
  * Created by Victor 25.09.2025
  */
 
 public class Main {
-    private static final UserService userService = new UserService();
+    private static final UserService userService = new UserService(new UserDAOImpl());
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -51,12 +52,38 @@ public class Main {
     }
 
     private static void createUser() {
+        // name section
+        // TODO: check chars for length
         System.out.println("enter your name: ");
         String name = scanner.nextLine();
+
+        // email section
+        // TODO: check chars for length and @
         System.out.println("enter your email");
         String email = scanner.nextLine();
-        System.out.println("enter your age");
-        int age = Integer.parseInt(scanner.nextLine());
+
+        // age section
+        int age = 0;
+        while (true) {
+            System.out.println("enter your age");
+            String input = scanner.nextLine();
+
+            boolean isNum = true;
+            for (char c : input.toCharArray()) {
+                if(!Character.isDigit(c)) {
+                    isNum = false;
+                    break;
+                }
+            }
+
+            if (isNum && !input.isEmpty()) {
+                age = Integer.parseInt(input);
+                break;
+            } else {
+                System.out.println("invalid input, use only nummbers");
+            }
+        }
+        // age section
 
         User user = new User(name, email, age, LocalDate.now());
         userService.createUser(user);
