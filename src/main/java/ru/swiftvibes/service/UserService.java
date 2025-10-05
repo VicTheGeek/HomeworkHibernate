@@ -1,6 +1,5 @@
 package ru.swiftvibes.service;
 
-import ru.swiftvibes.dao.UserDAOImpl;
 import ru.swiftvibes.dao.UserDao;
 import ru.swiftvibes.entity.User;
 
