@@ -63,7 +63,7 @@ public class UserDAOTest {
     }
 
     @Test
-    public void сreateUserTest() {
+    public void createUserTest() {
         User user = new User("test", "aa@aa.aa", 22, LocalDate.now());
         userDao.create(user);
 
